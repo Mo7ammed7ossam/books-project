@@ -32,7 +32,7 @@ def get_author(request, author_id):
 
 def add_new_book(request):
     if request.method == "POST":
-        form = Book_Form(request.POST)
+        form = Book_Form(request.POST, request.FILES)
 
         if form.is_valid():
             book = form.save()
@@ -46,7 +46,7 @@ def update_book_data(request, book_ISBN):
     book = get_object_or_404(Book, ISBN=book_ISBN)
 
     if request.method == "POST":
-        form = Book_Form(request.POST, instance=book)
+        form = Book_Form(request.POST, request.FILES, instance=book)
 
         if form.is_valid():
             book = form.save()

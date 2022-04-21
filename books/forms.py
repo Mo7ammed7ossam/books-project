@@ -12,4 +12,5 @@ class Book_Form(forms.ModelForm):
                   'publish_date',
                   'author',
                   'price',
-                  'appropriate']
+                  'appropriate',
+                  'poster']
