@@ -1,0 +1,92 @@
+{% extends 'books/layout.html' %} 
+
+{% block title %}Book Details{% endblock title%} 
+
+{% load static %} 
+
+
+{% block content%}
+
+<h1 class="text-center my-4">Book Details</h1>
+
+<div class="row container rounded mx-auto my-5">
+  <div class="image-Conatainer col-5 p-0 rounded shadow-lg">
+    <img class="img-fluid w-100" alt="not found" src="{{book.poster.url}}" />
+  </div>
+
+  <div class="col-7 book-details">
+    <div
+      class="row d-flex justify-content-around align-items-center h-100 flex-column"
+    >
+      <div class="col-10 title text-center">
+        <p>{{book.title}}</p>
+      </div>
+
+      <div class="col-10 font-monospace">
+        <p>{{book.description}}</p>
+      </div>
+
+      <div class="col-10">
+        <table class="table w-75 bord h-100 mx-auto text-center">
+          <tbody>
+            <tr class="h-25">
+              <td class="Key fw-bold">Author</td>
+              <td class="Key">|</td>
+              <td class="fst-italic">
+                <a
+                  class="btn btn-dark px-4 py-2"
+                  href="author/{{book.author.id}}"
+                >
+                  {{book.author.name}}
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="Key fw-bold">Publish date</td>
+              <td class="Key">|</td>
+              <td>{{book.publish_date}}</td>
+            </tr>
+
+            <tr>
+              <td class="Key fw-bold">Added to Site at</td>
+              <td class="Key">|</td>
+              <td>{{book.created_at|date:"d-M-Y, H:m"}}</td>
+            </tr>
+
+            <tr>
+              <td class="Key fw-bold">Appropriate</td>
+              <td class="Key">|</td>
+              <td>
+                {% if book.appropriate == "ad" %} 
+                {{ "adult" }} 
+                {% elif book.appropriate == "un" %} 
+                {{ "under 8" }} 
+                {% elif book.appropriate == "bt" %} 
+                {{ "between 8-15" }} 
+                {% endif %}
+              </td>
+            </tr>
+
+            <tr>
+              <td class="Key fw-bold">Price</td>
+              <td class="Key">|</td>
+              <td>{{book.price}}$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-10 d-flex justify-content-around">
+        <a class="btn btn-primary py-2 px-5" href="/books/edit/{{book.ISBN}}"
+          >Update</a
+        >
+        <a class="btn btn-danger py-2 px-5" href="/books/delete/{{book.ISBN}}"
+          >Delete</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

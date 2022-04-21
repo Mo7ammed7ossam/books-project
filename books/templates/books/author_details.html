@@ -1,0 +1,41 @@
+{% extends 'books/layout.html' %} 
+
+{% block title %} Author {%endblock title %} 
+
+{% load static %}
+
+{% block content %}
+
+<h1 class="text-center my-4">Author: {{author.name}}</h1>
+<div class="row">
+  {%for book in books%}
+
+  <div class="col-sm-6 col-md-4 col-lg-3 pb-4">
+    <div class="book-card h-100 rounded shadow-lg my-3">
+      <img
+        class="img-fluid w-100 h-100"
+        alt="not found"
+        src="{{book.poster.url}}"
+      />
+
+      <div class="book-desc text-light p-3">
+        <div class="d-flex flex-column h-25 justify-content-between">
+          <h5 class="text-center">{{ book.title }}</h5>
+          <div class="text-center">
+
+            <a class="btn btn-light px-4 py-2" href="/books/{{book.ISBN}}">
+              Details
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%empty%}
+  <h1>No Books Found</h1>
+  {%endfor%}
+</div>
+
+{% endblock content %}
